@@ -9,11 +9,11 @@ function timeoutSignal(ms) {
     if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
       return AbortSignal.timeout(ms);
     }
-  } catch { /* ignore */ }
+  } catch { /* خطا مهم نیست */ }
   try {
     const c = new AbortController();
     setTimeout(() => {
-      try { c.abort(); } catch { /* ignore */ }
+      try { c.abort(); } catch { /* خطا مهم نیست */ }
     }, ms);
     return c.signal;
   } catch {
@@ -75,7 +75,7 @@ export async function saveProgress(childId, stage, score, completed) {
     const prev = JSON.parse(localStorage.getItem(key) || '{}');
     prev[stage] = { score, completed };
     localStorage.setItem(key, JSON.stringify(prev));
-  } catch { /* ignore */ }
+  } catch { /* خطا مهم نیست */ }
 }
 
 export async function saveAnswer(childId, questionId, stage, isCorrect) {
@@ -90,7 +90,7 @@ export async function saveAnswer(childId, questionId, stage, isCorrect) {
         is_correct: isCorrect
       })
     });
-  } catch { /* ignore */ }
+  } catch { /* خطا مهم نیست */ }
 }
 
 export function loadLocalProgress(childId) {
@@ -111,5 +111,5 @@ export async function clearHistory(childId) {
   } catch { /* آفلاین: فقط محلی پاک می‌شود */ }
   try {
     localStorage.removeItem(`train-progress-${childId}`);
-  } catch { /* ignore */ }
+  } catch { /* خطا مهم نیست */ }
 }

@@ -117,10 +117,10 @@ function stopCurrent() {
       currentAudio.currentTime = 0;
     }
     currentAudio = null;
-  } catch { /* ignore */ }
+  } catch { /* خطا مهم نیست */ }
   try {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-  } catch { /* ignore */ }
+  } catch { /* خطا مهم نیست */ }
 }
 
 /** پخش یک فایل صوتی؛ true اگر پخش شد */
@@ -166,7 +166,7 @@ function tone(freq, start, dur, type = 'sine', vol = 0.22) {
     g.connect(c.destination);
     o.start(c.currentTime + start);
     o.stop(c.currentTime + start + dur + 0.05);
-  } catch { /* ignore */ }
+  } catch { /* خطا مهم نیست */ }
 }
 
 function synthCheer() {
@@ -225,7 +225,7 @@ export function speak(text, speed = 'normal') {
     const fa = voices.find((v) => v.lang && v.lang.startsWith('fa'));
     if (fa) u.voice = fa;
     window.speechSynthesis.speak(u);
-  } catch { /* ignore */ }
+  } catch { /* خطا مهم نیست */ }
 }
 
 /**

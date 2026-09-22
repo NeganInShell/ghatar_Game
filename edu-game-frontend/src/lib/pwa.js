@@ -5,7 +5,7 @@ const listeners = new Set();
 
 function notify() {
   listeners.forEach((fn) => {
-    try { fn(state()); } catch { /* ignore */ }
+    try { fn(state()); } catch { /* خطا مهم نیست */ }
   });
 }
 
@@ -29,7 +29,7 @@ export function state() {
 
 export function onPWAChange(fn) {
   listeners.add(fn);
-  try { fn(state()); } catch { /* ignore */ }
+  try { fn(state()); } catch { /* خطا مهم نیست */ }
   return () => listeners.delete(fn);
 }
 

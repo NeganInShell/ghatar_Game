@@ -65,7 +65,7 @@
     try {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('train-theme', theme);
-    } catch { /* ignore */ }
+    } catch { /* خطا مهم نیست */ }
   }
   $effect(() => {
     applyTheme();
@@ -74,7 +74,7 @@
     try {
       localStorage.setItem('train-child', childId);
       localStorage.setItem('train-speed', speed);
-    } catch { /* ignore */ }
+    } catch { /* خطا مهم نیست */ }
   });
 
   // 📲 نصب + وضعیت شبکه + آپدیت سرویس‌ورکر — فقط مرورگر
@@ -85,7 +85,7 @@
       window.addEventListener('online', () => { online = true; });
       window.addEventListener('offline', () => { online = false; });
       window.addEventListener('pwa:update', () => { swUpdate = true; });
-    } catch { /* ignore */ }
+    } catch { /* خطا مهم نیست */ }
   }
 
   async function installApp() {
@@ -94,7 +94,7 @@
   }
 
   function reloadApp() {
-    try { window.location.reload(); } catch { /* ignore */ }
+    try { window.location.reload(); } catch { /* خطا مهم نیست */ }
   }
 
   function toggleTheme() {
@@ -163,7 +163,7 @@
     await praiseSay(p.text, p.idx, speed);
     try {
       await saveAnswer(childId, item?.id ?? qi, station, true);
-    } catch { /* ignore */ }
+    } catch { /* خطا مهم نیست */ }
     setTimeout(next, delay());
   }
 
@@ -173,7 +173,7 @@
     await speakQ('یک بار دیگه امتحان کن', TRY_SOUND);
     try {
       await saveAnswer(childId, item?.id ?? qi, station, false);
-    } catch { /* ignore */ }
+    } catch { /* خطا مهم نیست */ }
     picked = null;
     built = [];
   }
@@ -196,13 +196,13 @@
   async function finishStation() {
     try {
       await saveProgress(childId, station, stars, true);
-    } catch { /* ignore */ }
+    } catch { /* خطا مهم نیست */ }
     refreshProgress();
     // 🚂 قطار تندرو با بوق رد می‌شود، بعد جشن
     trainPass = true;
     try {
       await horn();
-    } catch { /* ignore */ }
+    } catch { /* خطا مهم نیست */ }
     await new Promise((r) => setTimeout(r, 2100));
     trainPass = false;
     const p = nextPraise();
@@ -242,7 +242,7 @@
       feedback = { kind: 'good', text: `«${q.result}» 🎉` };
       try {
         await saveAnswer(childId, q.id, station, true);
-      } catch { /* ignore */ }
+      } catch { /* خطا مهم نیست */ }
       stars += 1;
     }, speed === 'slow' ? 1400 : speed === 'fast' ? 600 : 900);
   }
@@ -307,7 +307,7 @@
     clearing = true;
     try {
       await clearHistory(childId || 'دوست من');
-    } catch { /* ignore */ }
+    } catch { /* خطا مهم نیست */ }
     progress = {};
     stars = 0;
     confirmClear = false;

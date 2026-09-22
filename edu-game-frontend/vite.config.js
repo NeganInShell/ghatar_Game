@@ -2,7 +2,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vite'
 
-// https://vite.dev/config/
+// مستندات رسمی وایت: https://vite.dev/config/
 // نکته دیپلوی: سایت روی GitHub Pages با ساب‌مسیر /ghatar_Game/ بالا می‌رود،
 // برای همین base ست شده. اگر دامنه اختصاصی گرفتی، هر دو را به '/' برگردان.
 const SITE_BASE = '/ghatar_Game/';

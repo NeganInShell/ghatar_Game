@@ -72,7 +72,7 @@ export const PRAISE = ['آفرین! 🎉', 'عالی بود! ⭐', 'درست خ�
 export const TRY_AGAIN = 'یک بار دیگه امتحان کن 🌱';
 
 // ── ۲۰ ایستگاه: ساده → دشوار ──
-// type: letter-pick | combine | syllable-pick | build | word-read
+// نوع هر ایستگاه یکی از این‌هاست: حرف‌شناسی، ترکیب، گوش‌کن، کارت‌سازی، کلمه‌خوانی
 export const STATIONS = [
   { n: 1, type: 'letter-pick', title: 'دوست‌های اول', desc: 'ا، ب، م را پیدا کن', pool: ['ا', 'ب', 'م'] },
   { n: 2, type: 'letter-pick', title: 'دوست‌های دوم', desc: 'ن، ر، د را پیدا کن', pool: ['ن', 'ر', 'د'] },
