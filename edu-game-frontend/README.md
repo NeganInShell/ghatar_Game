@@ -1,43 +1,101 @@
-# Svelte + Vite
+<div align="center">
 
-This template should help get you started developing with Svelte in Vite.
+# 🧡 فرانت قطار کلمه‌ها
 
-## Recommended IDE Setup
+### بازی اسولت «قطار کلمه‌ها» — ۲۰ ایستگاه ترکیب‌خوانی فارسی 🚂
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+</div>
 
-## Need an official Svelte framework?
+## معرفی
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+رابط کاربری بازی با **اسولت ۵** و **ویت** ساخته شده: راست‌چین و فارسی، فونت درشت وزیرمتن، انیمیشن نرم، حالت روشن/تیره، کاملاً ریسپانسیو و قابل نصب به‌عنوان اپ (PWA) با کارکرد آفلاین.
 
-## Technical considerations
+## تکنولوژی‌ها
 
-**Why use this over SvelteKit?**
+| ابزار | کاربرد |
+|---|---|
+| اسولت ۵ (runes) + ویت | رابط و بیلد |
+| vite-plugin-pwa + Workbox | مانیفست فارسی، آیکون‌ها و سرویس‌ورکر آفلاین |
+| TTS مرورگر + WebAudio | گفتار فارسی و افکت تشویق (بدون نیاز به فایل) |
+| SVG دستی | ۴۴ تصویر کلمه + ۲۰ آیکون ایستگاه + قطار و روباه |
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+## اجرا
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+```bash
+npm install   # نصب بسته‌ها
+npm run dev   # اجرا روی http://localhost:5173
+npm run build # خروجی نهایی در dist/
 ```
+
+### متغیر محیطی
+
+| نام | پیش‌فرض | توضیح |
+|---|---|---|
+| `VITE_API_URL` | `http://localhost:3000` | آدرس بک‌اند؛ اگر در دسترس نباشد بازی با داده محلی ادامه می‌دهد |
+
+> نکته دیپلوی: `base` در `vite.config.js` روی `/ghatar_Game/` است (ساب‌مسیر گیت‌هاب پیجز). با دامنه اختصاصی آن را به `/` برگردان. آدرس عکس‌ها و صداها با `lib/paths.js` خودکار با همین base ساخته می‌شود.
+
+## بخش‌های بازی (`src/App.svelte`)
+
+| صفحه | توضیح |
+|---|---|
+| 🏠 خانه | اسم کودک، سرعت بازی، مجموع ستاره‌ها، نصب اپ، پاک‌کردن تاریخچه |
+| 🗺️ نقشه | ۲۰ ایستگاه با ستاره هر ایستگاه (⭐ n از ۴) |
+| 🚂 بازی | ۵ نوع سؤال: حرف‌شناسی، ترکیب انیمیشنی، گوش‌کن، کارت‌سازی، کلمه‌خوانی |
+| 🎉 جشن | قطار تندرو با بوق 📯، بارش ستاره، دکمه «ایستگاه بعدی ⏭️» |
+
+## محتوا
+
+- **۲۰ ایستگاه** از ساده به دشوار (تعریف در `lib/data.js` + `STATIONS`)
+- **۴۴ کلمه یونیک** بدون تکرار بین ایستگاه‌ها (آب تا نترس!)
+- **۹ هجا** با ترکیب `+ ا` (ما، با، نا ...)
+
+## 🔊 صداها (`public/sounds/`)
+
+اسم هر فایل دقیقاً همان چیزی است که خوانده می‌شود؛ مثلاً `combine-ز-ا.mp3` یعنی «ز + ا». اگر فایلی نباشد، بازی خودکار با TTS می‌خواند.
+
+- لیست کامل: `manifest.json` — راهنمای فارسی: `README.md`
+
+## 🖼️ عکس‌ها (`public/images/`)
+
+```
+images/words/word-آب.svg        ← ۴۴ تصویر کلمه
+images/stations/station-1.svg   ← ۲۰ آیکون ایستگاه
+images/mascot-fox.svg           ← 🦊 روباه راهنما
+images/train.svg                ← 🚂 قطار
+```
+
+## 📲 نصب (PWA)
+
+| پلتفرم | روش |
+|---|---|
+| اندروید | دکمه «نصب قطار کلمه‌ها 📲» در صفحه اصلی |
+| آیفون | دکمه Share سافاری ← Add to Home Screen (راهنما داخل بازی هست) |
+
+آفلاین کامل، بنر «نسخه جدید» برای به‌روزرسانی خودکار.
+
+## ساختار پوشه‌ها
+
+```
+edu-game-frontend/
+├── src/
+│   ├── App.svelte       ← کل بازی
+│   ├── app.css          ← لایت/دارک + ریسپانسیو + انیمیشن
+│   ├── main.js          ← ثبت سرویس‌ورکر
+│   └── lib/
+│       ├── data.js      ← حروف، هجاها، ۴۴ کلمه، ۲۰ ایستگاه
+│       ├── api.js       ← اتصال بک‌اند با fallback محلی
+│       ├── audio.js     ← پخش هوشمند فایل ← TTS + افکت‌ها
+│       ├── pwa.js       ← منطق نصب
+│       └── paths.js     ← آدرس دارایی‌ها با base
+├── public/
+│   ├── sounds/          ← manifest + راهنما (+ mp3های معلم بعداً)
+│   ├── images/          ← SVGها
+│   └── icons/           ← آیکون نصب (۱۹۲/۵۱۲/maskable)
+├── index.html
+└── vite.config.js
+```
+
+## ⚖️ حق نشر
+
+© تمام حقوق این پروژه متعلق به **محسن تقی‌پور** است. استفاده بدون اجازه **غیرقانونی** و از نظر شرعی **حرام** است.
