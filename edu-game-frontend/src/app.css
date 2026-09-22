@@ -666,6 +666,48 @@ h1.title {
   #app { padding: 16px 16px 32px; }
 }
 
+/* 📲 بنرها و کارت نصب PWA */
+.pwa-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 16px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 4vw, 1.1rem);
+  animation: card-in 0.4s var(--ease);
+  flex-wrap: wrap;
+}
+.pwa-banner.update { background: #e8f7ff; border: 2px solid var(--accent2); color: #1668a8; }
+[data-theme='dark'] .pwa-banner.update { background: #16283a; color: #6cc2ff; }
+.pwa-banner.offline { background: #fff6d6; border: 2px dashed #d9b400; color: #8a6d00; }
+[data-theme='dark'] .pwa-banner.offline { background: #3a2f10; color: #ffd93d; }
+.pwa-btn {
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 1rem;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 20px;
+  min-height: 44px;
+  background: #6c4dff;
+  color: #fff;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.install-card {
+  background: var(--soft);
+  border: 2px dashed var(--accent2);
+  border-radius: 20px;
+  padding: 14px;
+  margin-top: 14px;
+  animation: card-in 0.5s var(--ease);
+}
+.install-card.ios { border-color: var(--line); }
+.install-card .btn { width: min(100%, 320px); }
+
 /* گوشی‌های کوچک */
 @media (max-width: 420px) {
   #app { padding: 8px 8px calc(20px + env(safe-area-inset-bottom, 0px)); }

@@ -2,6 +2,7 @@
   import { cheer, pop, choo, horn, say as saySmart, praiseSay, letterSound, syllableSound, combineSound, wordSound, stationSound, TRY_SOUND, DONE_SOUND, TRAIN_SOUND } from './lib/audio.js';
   import { fetchStation, saveProgress, saveAnswer, loadLocalProgress, clearHistory } from './lib/api.js';
   import { PRAISE, TRY_AGAIN, STATIONS, stationImage, wordImage } from './lib/data.js';
+  import { onPWAChange, promptInstall } from './lib/pwa.js';
 
   let screen = $state('home');
   let station = $state(1);
@@ -31,14 +32,16 @@
   let confirmClear = $state(false);
   let clearing = $state(false);
   let trainPass = $state(false);
+  let pwa = $state({ canInstall: false, isIOS: false, isStandalone: false, showIOSGuide: false });
+  let online = $state(true);
+  let swUpdate = $state(false);
 
   function delay() {
     return speed === 'slow' ? 2200 : speed === 'fast' ? 900 : 1500;
   }
 
   // تم + اسم — فقط در مرورگر
-  if (typeof localStorage !== 'undefined') {
-    const savedTheme = localStorage.getItem('train-theme');
+  if (typeof localStorage !== 'undefined') {    const savedTheme = localStorage.getItem('train-theme');
     const savedChild = localStorage.getItem('train-child');
     const savedSpeed = localStorage.getItem('train-speed');
     if (savedChild) childId = savedChild;
@@ -72,6 +75,26 @@
       localStorage.setItem('train-speed', speed);
     } catch { /* ignore */ }
   });
+
+  // 📲 نصب + وضعیت شبکه + آپدیت سرویس‌ورکر — فقط مرورگر
+  if (typeof window !== 'undefined') {
+    onPWAChange((s) => { pwa = s; });
+    try {
+      online = navigator.onLine !== false;
+      window.addEventListener('online', () => { online = true; });
+      window.addEventListener('offline', () => { online = false; });
+      window.addEventListener('pwa:update', () => { swUpdate = true; });
+    } catch { /* ignore */ }
+  }
+
+  async function installApp() {
+    const opened = await promptInstall();
+    if (!opened) void pop();
+  }
+
+  function reloadApp() {
+    try { window.location.reload(); } catch { /* ignore */ }
+  }
 
   function toggleTheme() {
     theme = theme === 'light' ? 'dark' : 'light';
@@ -311,6 +334,16 @@
   <button type="button" class="icon-btn" onclick={toggleTheme} aria-label={theme === 'light' ? 'حالت تیره' : 'حالت روشن'}>{theme === 'light' ? '🌙' : '☀️'}</button>
 </div>
 
+{#if swUpdate}
+  <div class="pwa-banner update" role="status">
+    <span>نسخه جدید بازی اومد! 🎉</span>
+    <button type="button" class="pwa-btn" onclick={reloadApp}>به‌روز کن 🔄</button>
+  </div>
+{/if}
+{#if !online}
+  <div class="pwa-banner offline" role="status">آفلاین هستی ولی بازی کار می‌کنه ✅🚂</div>
+{/if}
+
 {#if screen === 'home'}
   <div class="card">
     <img class="hero-img" src="/images/train.svg" alt="قطار کودکانه بازی" />
@@ -361,6 +394,18 @@
     </div>
     <p class="hint">حروف: ا، ب، د، ن، ر، س، ت، ز، م، خ — بدون تایمر و بدون استرس 💛</p>
     <p class="theme-hint">۲۰ ایستگاه از ساده به سخت + حالت شب 🌙</p>
+
+    {#if pwa.canInstall}
+      <div class="install-card" role="group" aria-label="نصب بازی">
+        <div><b>📲 بازی رو نصب کن تا آفلاین هم داشته باشیش!</b></div>
+        <button type="button" class="btn green" onclick={installApp}>نصب قطار کلمه‌ها 📲</button>
+      </div>
+    {:else if pwa.showIOSGuide}
+      <div class="install-card ios" role="note" aria-label="راهنمای نصب آیفون">
+        <div><b>📲 نصب روی آیفون:</b></div>
+        <div class="hint">دکمه <b>Share ⎙</b> سافاری → <b>Add to Home Screen</b> → <b>Add</b> ✅</div>
+      </div>
+    {/if}
   </div>
 {:else if screen === 'map'}
   <div class="card">
