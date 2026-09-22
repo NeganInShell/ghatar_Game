@@ -1,0 +1,23 @@
+# Rust
+edu-game-backend/target/
+edu-game-backend/data/*.db
+edu-game-backend/data/*.db-*
+
+# Node / Frontend
+edu-game-frontend/node_modules/
+edu-game-frontend/dist/
+edu-game-frontend/dist-ssr/
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
+
+# OS / Editors
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*~
