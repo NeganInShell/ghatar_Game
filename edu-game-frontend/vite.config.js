@@ -4,20 +4,23 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 // نکته دیپلوی: سایت روی GitHub Pages با ساب‌مسیر /ghatar_Game/ بالا می‌رود،
-// برای همین base ست شده. اگر دامنه اختصاصی گرفتی، base را به '/' برگردان.
+// برای همین base ست شده. اگر دامنه اختصاصی گرفتی، هر دو را به '/' برگردان.
+const SITE_BASE = '/ghatar_Game/';
+
 export default defineConfig({
-  base: '/ghatar_Game/',
+  base: SITE_BASE,
   plugins: [
     svelte(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
+        id: SITE_BASE,
         name: 'قطار کلمه‌ها | بازی ترکیب‌خوانی',
         short_name: 'قطار کلمه‌ها',
         description: 'بازی آموزشی ترکیب‌خوانی فارسی برای کلاس اولی‌ها — ۲۰ ایستگاه، ۴۴ کلمه',
-        start_url: '/',
-        scope: '/',
+        start_url: SITE_BASE,
+        scope: SITE_BASE,
         display: 'standalone',
         orientation: 'any',
         dir: 'rtl',
