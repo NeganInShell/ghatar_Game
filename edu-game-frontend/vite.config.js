@@ -3,7 +3,10 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
+// نکته دیپلوی: سایت روی GitHub Pages با ساب‌مسیر /ghatar_Game/ بالا می‌رود،
+// برای همین base ست شده. اگر دامنه اختصاصی گرفتی، base را به '/' برگردان.
 export default defineConfig({
+  base: '/ghatar_Game/',
   plugins: [
     svelte(),
     VitePWA({
