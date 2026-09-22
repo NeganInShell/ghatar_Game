@@ -3,6 +3,7 @@
   import { fetchStation, saveProgress, saveAnswer, loadLocalProgress, clearHistory } from './lib/api.js';
   import { PRAISE, TRY_AGAIN, STATIONS, stationImage, wordImage } from './lib/data.js';
   import { onPWAChange, promptInstall } from './lib/pwa.js';
+  import { ASSET } from './lib/paths.js';
 
   let screen = $state('home');
   let station = $state(1);
@@ -346,7 +347,7 @@
 
 {#if screen === 'home'}
   <div class="card">
-    <img class="hero-img" src="/images/train.svg" alt="قطار کودکانه بازی" />
+    <img class="hero-img" src={ASSET("images/train.svg")} alt="قطار کودکانه بازی" />
     <h1 class="title">قطار کلمه‌ها</h1>
     <p class="subtitle">بازی ترکیب‌خوانی برای کلاس اولی‌های گل 🌸</p>
     <div class="rail" aria-hidden="true"></div>
@@ -409,7 +410,7 @@
   </div>
 {:else if screen === 'map'}
   <div class="card">
-    <img class="mascot-img" src="/images/mascot-fox.svg" alt="روباه مهربان راهنما" />
+    <img class="mascot-img" src={ASSET("images/mascot-fox.svg")} alt="روباه مهربان راهنما" />
     <h1 class="title" style="font-size:2rem;">سلام {childId}! 👋</h1>
     <p class="subtitle">سوار قطار شو، {doneCount} از ۲۰ ایستگاه رو رفتی! ⭐ {totalStars} 🚂</p>
     <div class="rail" aria-hidden="true"></div>
@@ -436,7 +437,7 @@
   {#key qkey}
   <div class="card">
     {#if loading}
-      <img class="hero-img" src="/images/train.svg" alt="قطار در حال آمدن" />
+      <img class="hero-img" src={ASSET("images/train.svg")} alt="قطار در حال آمدن" />
       <p class="subtitle">قطار داره میاد... صبر کن! 💨</p>
     {:else if q}
       <p class="subtitle">🚂 ایستگاه {station} ({cfg?.title}) — سؤال {qi + 1} از {questions.length}</p>
@@ -536,7 +537,7 @@
 {#if trainPass}
   <div class="train-pass" role="status" aria-label="قطار با سرعت رد می‌شود">
     <div class="tp-smoke" aria-hidden="true"><span>💨</span><span>💨</span><span>💨</span></div>
-    <img class="tp-train" src="/images/train.svg" alt="" />
+    <img class="tp-train" src={ASSET("images/train.svg")} alt="" />
     <div class="tp-text">بوق بوق! 🚂💨</div>
     <div class="tp-track" aria-hidden="true"></div>
   </div>

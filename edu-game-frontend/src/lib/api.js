@@ -1,4 +1,5 @@
 import { localStation, localQuestions } from './data.js';
+import { ASSET } from './paths.js';
 
 const BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -20,6 +21,17 @@ function timeoutSignal(ms) {
   }
 }
 
+/** آدرس‌های بک‌اند مطلق‌اند (/sounds/...)؛ زیر ساب‌مسیر سایت نرمالشان می‌کنیم */
+function fixAssets(list) {
+  return (list || []).map((q) => {
+    const out = { ...q };
+    for (const k of ['sound', 'resultSound', 'image']) {
+      if (typeof out[k] === 'string' && out[k].startsWith('/')) out[k] = ASSET(out[k]);
+    }
+    return out;
+  });
+}
+
 /** ایستگاه ۱..۲۰ — اول بک‌اند، اگر نبود محلی */
 export async function fetchStation(station, count = 4) {
   try {
@@ -28,7 +40,7 @@ export async function fetchStation(station, count = 4) {
     });
     if (!res.ok) throw new Error('api');
     const json = await res.json();
-    if (json?.questions?.length) return json.questions;
+    if (json?.questions?.length) return fixAssets(json.questions);
     throw new Error('empty');
   } catch {
     return localStation(station, count);
@@ -43,7 +55,7 @@ export async function fetchStage(stage, count = 4) {
     });
     if (!res.ok) throw new Error('api');
     const json = await res.json();
-    if (json?.questions?.length) return json.questions;
+    if (json?.questions?.length) return fixAssets(json.questions);
     throw new Error('empty');
   } catch {
     return localQuestions(stage, count);

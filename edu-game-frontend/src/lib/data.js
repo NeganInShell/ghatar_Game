@@ -1,3 +1,5 @@
+import { ASSET } from './paths.js';
+
 // داده محلی + ۲۰ ایستگاه (fallback دقیق بک‌اند)
 // حروف: ا، ب، د، ن، ر، س، ت، ز، م، خ
 
@@ -129,10 +131,10 @@ function cycleFill(items, count) {
 }
 
 export function wordImage(w) {
-  return `/images/words/word-${w}.svg`;
+  return ASSET(`images/words/word-${w}.svg`);
 }
 export function stationImage(n) {
-  return `/images/stations/station-${n}.svg`;
+  return ASSET(`images/stations/station-${n}.svg`);
 }
 
 /** سؤال‌های محلی یک ایستگاه ۱..۲۰ */
@@ -149,7 +151,7 @@ export function localStation(station, count = 4) {
       instruction: `حرف «${ch}» را پیدا کن 👀`,
       options: distractors(LETTERS, ch, 2),
       correct: ch,
-      sound: `/sounds/letters/letter-${ch}.mp3`,
+      sound: ASSET(`sounds/letters/letter-${ch}.mp3`),
       station
     }));
   }
@@ -162,8 +164,8 @@ export function localStation(station, count = 4) {
       b: s.b,
       result: s.text,
       instruction: `${s.a} + ${s.b} = ؟ 🚂`,
-      sound: `/sounds/combine/combine-${s.a}-${s.b}.mp3`,
-      resultSound: `/sounds/syllables/syllable-${s.text}.mp3`,
+      sound: ASSET(`sounds/combine/combine-${s.a}-${s.b}.mp3`),
+      resultSound: ASSET(`sounds/syllables/syllable-${s.text}.mp3`),
       station
     }));
   }
@@ -177,7 +179,7 @@ export function localStation(station, count = 4) {
       instruction: `«${s.text}» کدومه؟ 👂`,
       options: distractors(all, s.text, 2),
       correct: s.text,
-      sound: `/sounds/syllables/syllable-${s.text}.mp3`,
+      sound: ASSET(`sounds/syllables/syllable-${s.text}.mp3`),
       station
     }));
   }
@@ -190,7 +192,7 @@ export function localStation(station, count = 4) {
       parts: [s.a, s.b],
       pool: shuffle([s.a, s.b, 'ب', 'ن'].filter((v, idx, a) => a.indexOf(v) === idx)),
       instruction: `با کارت‌ها «${s.text}» را بساز 🧩`,
-      sound: `/sounds/syllables/syllable-${s.text}.mp3`,
+      sound: ASSET(`sounds/syllables/syllable-${s.text}.mp3`),
       station
     }));
   }
@@ -205,7 +207,7 @@ export function localStation(station, count = 4) {
     instruction: 'این کلمه را بخوان 📖',
     options: distractors(allW, w.text, 2),
     correct: w.text,
-    sound: `/sounds/words/word-${w.text}.mp3`,
+    sound: ASSET(`sounds/words/word-${w.text}.mp3`),
     station
   }));
 }

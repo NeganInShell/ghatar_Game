@@ -75,21 +75,23 @@
 // کافیست فایل mp3 را دقیقاً با همین اسم در پوشه درست بگذاری.
 // اگر فایلی نباشد، بازی خودکار با صدای TTS می‌خواند (بدون خطا).
 
-export const letterSound = (ch) => `/sounds/letters/letter-${ch}.mp3`;
-export const syllableSound = (syl) => `/sounds/syllables/syllable-${syl}.mp3`;
-export const combineSound = (a, b) => `/sounds/combine/combine-${a}-${b}.mp3`;
-export const wordSound = (w) => `/sounds/words/word-${w}.mp3`;
-export const stationSound = (n) => `/sounds/stations/station-${n}-intro.mp3`;
+import { ASSET } from './paths.js';
+
+export const letterSound = (ch) => ASSET(`sounds/letters/letter-${ch}.mp3`);
+export const syllableSound = (syl) => ASSET(`sounds/syllables/syllable-${syl}.mp3`);
+export const combineSound = (a, b) => ASSET(`sounds/combine/combine-${a}-${b}.mp3`);
+export const wordSound = (w) => ASSET(`sounds/words/word-${w}.mp3`);
+export const stationSound = (n) => ASSET(`sounds/stations/station-${n}-intro.mp3`);
 
 export const PRAISE_FILES = [
-  '/sounds/praise/praise-آفرین.mp3',
-  '/sounds/praise/praise-عالی-بود.mp3',
-  '/sounds/praise/praise-درست-خوندی.mp3',
-  '/sounds/praise/praise-فوق‌العاده‌ای.mp3'
+  ASSET('sounds/praise/praise-آفرین.mp3'),
+  ASSET('sounds/praise/praise-عالی-بود.mp3'),
+  ASSET('sounds/praise/praise-درست-خوندی.mp3'),
+  ASSET('sounds/praise/praise-فوق‌العاده‌ای.mp3')
 ];
-export const TRY_SOUND = '/sounds/guide/try-again.mp3';
-export const DONE_SOUND = '/sounds/guide/station-done.mp3';
-export const TRAIN_SOUND = '/sounds/guide/train-move.mp3';
+export const TRY_SOUND = ASSET('sounds/guide/try-again.mp3');
+export const DONE_SOUND = ASSET('sounds/guide/station-done.mp3');
+export const TRAIN_SOUND = ASSET('sounds/guide/train-move.mp3');
 
 const fileCache = new Map(); // path -> true(موجود) | false(ناموجود)
 
@@ -192,21 +194,21 @@ function synthHorn() {
 }
 
 export async function cheer() {
-  const played = await playFile('/sounds/effects/effect-cheer.mp3');
+  const played = await playFile(ASSET('sounds/effects/effect-cheer.mp3'));
   if (!played) synthCheer();
 }
 export async function pop() {
-  const played = await playFile('/sounds/effects/effect-pop.mp3');
+  const played = await playFile(ASSET('sounds/effects/effect-pop.mp3'));
   if (!played) synthPop();
 }
 export async function choo() {
-  const played = await playFile('/sounds/effects/effect-choo.mp3');
+  const played = await playFile(ASSET('sounds/effects/effect-choo.mp3'));
   if (!played) synthChoo();
 }
 
 /** بوق بلند قطار آخر مرحله — اول فایل effect-horn.mp3، وگرنه سنتز */
 export async function horn() {
-  const played = await playFile('/sounds/effects/effect-horn.mp3');
+  const played = await playFile(ASSET('sounds/effects/effect-horn.mp3'));
   if (!played) synthHorn();
 }
 
